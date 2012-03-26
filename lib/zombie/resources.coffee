@@ -236,6 +236,8 @@ class Resources extends Array
                   if method in ["POST", "PUT"]
                     delete headers['content-type']
                     delete headers['content-length']
+                  if redirect.host != url.host
+                    delete headers['cookie']
                   @_makeRequest "GET", redirect, null, headers, resource, callback
             else
               error = new Error("Redirect with no Location header, cannot follow")
